@@ -1,0 +1,49 @@
+{% load static %}
+<html lang="pt-br">
+
+<head>
+	<meta charset="utf-8">
+	<title>MED / Cadastro </title>
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+	<div class="container">
+		<div class="login-box animated fadeInUp">
+			<div class="box-header">
+
+				<h2>Cadastro</h2>
+
+			</div>
+			<form action="{% url 'cadastro' %}" method="post">
+			<label>Nome</label>
+			<br/>
+			<input type="text" name="nome" value="" maxlength="100" required>
+			<br/>
+			<label>Usuário</label>
+			<br/>
+			<input type="text" name="usuario" id="usuario" maxlength="80" required>
+			<br/>
+			<label>Senha</label>
+			<br/>
+			<input type="password" name="senha" value="" id="senha" maxlength="80" required>
+			<br/>
+            <label>Confirmar Senha</label>
+            <br/>
+            <input type="password" name="csenha" id="csenha" maxlength="80" required>
+            <br/>
+			<label>E-mail</label>
+			<br/>
+			<input type="text" name="email" id="email" maxlength="120" required>
+			<br/>
+			<button type="submit">Confirmar</button>
+			<br/>
+			<a href="{% url 'index' %}"><p class="small">Login</p></a>
+			</form>
+		</div>
+	</div>
+</body>
+
+
+</html>
