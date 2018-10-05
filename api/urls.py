@@ -22,6 +22,8 @@ from med import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     path('', views.index, name="index"),
-    path('login', views.login, name="login"),
+    path('login', views.logar, name="login"),
+    path('sair', views.sair, name="sair"),
     path('cadastro', views.cadastro, name="cadastro"),
+    path('adm', views.adm, name="adm"),
 ]
