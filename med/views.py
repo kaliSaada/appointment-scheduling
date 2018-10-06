@@ -33,9 +33,10 @@ def logar(request):
                 return HttpResponseRedirect('adm')
             except:
                 return render(request, 'index.html')
-    except:
-        messages.error(request, 'Usuário ou senha inválido!')
-        return redirect(index)
+        else:
+            return redirect_index_mensagem(1, request, 'Senha inválida!')
+    except User.DoesNotExist:
+        return redirect_index_mensagem(1, request, 'Usuário inválido!')
 
 
 @csrf_exempt
@@ -61,13 +62,28 @@ def cadastro(request):
             senha = request.POST['password']
             novoUsuario = User.objects.create_user(username=nome_usuario, email=email, password=senha)
             novoUsuario.save()
-            messages.success(request, 'Cadastro realizado com sucesso.')
-            return redirect(index)
+            return redirect_index_mensagem(0, request, 'Cadastro realizado com sucesso.')
     else:
         return render(request, 'cadastro.html')
 
 
 @csrf_exempt
 @api_view(["GET"])
+@permission_classes((IsAuthenticated,))
 def adm(request):
-    return render(request, 'adm.html')
+    if request.user is not None:
+        return render(request, 'adm.html')
+    else:
+        messages.error(request, 'Para acessar, digite login e senha.')
+        return redirect(index)
+
+
+def redirect_index_mensagem(tipo=None, request=None, texto=None):
+    if tipo == 0:
+        messages.success(request, texto)
+        return redirect(index)
+    elif tipo == 1:
+        messages.error(request, texto)
+        return redirect(index)
+    else:
+        return redirect(index)
