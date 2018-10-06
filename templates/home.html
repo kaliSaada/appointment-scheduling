@@ -15,30 +15,49 @@
     <script src="{% static 'js/fullcalendar.min.js' %}"></script>
     <script src="{% static 'js/gcal.min.js' %}"></script>
     <script src="{% static 'js/pt-br.js' %}"></script>
-    <script src="{% static 'js/calendario_adm.js' %}"></script>
+    <script src="{% static 'js/calendario.js' %}"></script>
 </head>
 
 <body>
-<div class="container">
+<nav class="nav">
     <div class="login-box animated fadeInUp">
         <div class="box-header">
+            <div class="center">
             <span class="title-adm">Agenda</span>
-            <a href="{% url 'sair' %}"><p class="small">Sair</p></a>
+                <div class="menu">
+                <a href="{% url 'sair' %}"><p class="small">Sair</p></a>
+                </div>
+            </div>
         </div>
     </div>
+</nav>
+<div class="container">
   <div id='wrap'>
-
     <div id='external-events'>
-      <h4>Consulta</h4>
-      <div class='fc-event'></div>
-      <div class='fc-event'>My Event 2</div>
-      <div class='fc-event'>My Event 3</div>
-      <div class='fc-event'>My Event 4</div>
-      <div class='fc-event'>My Event 5</div>
-      <p>
-        <input type='checkbox' id='drop-remove' />
-        <label for='drop-remove'>remove after drop</label>
-      </p>
+      <form action="{% url 'consulta' %}" method="post">
+        <h3>Marcar consulta</h3>
+        <label>Data&emsp;/&emsp; Hora</label>
+        <br/>
+        <input type="date" id="data" name="data" required>
+        <input type="time" id="time" name="time" min="4:00" max="23:00" required />
+        <br/>
+        <label>Comentario</label>
+        <br/>
+        <input type="text" id="comentario" name="comentario">
+        <br/>
+        <br/>
+        <button type="submit">Gravar</button>
+        <br/>
+        {% if messages %}
+        <span class="messages">
+        {% for message in messages %}
+            <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+        {% endfor %}
+        <span/>
+        {% endif %}
+       </form>
+    </div>
+    <div class="animated fadeInUp">
     </div>
 
     <div id='calendar'></div>
