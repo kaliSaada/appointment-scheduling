@@ -25,5 +25,9 @@ urlpatterns = [
     path('login', views.logar, name="login"),
     path('sair', views.sair, name="sair"),
     path('cadastro', views.cadastro, name="cadastro"),
+    path('home', views.home, name="home"),
     path('adm', views.adm, name="adm"),
+    path('agenda', views.agenda, name="agenda"),
+    path('consulta', views.consulta, name="consulta"),
 ]
+
