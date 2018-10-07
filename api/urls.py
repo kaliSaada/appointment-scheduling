@@ -27,7 +27,12 @@ urlpatterns = [
     path('cadastro', views.cadastro, name="cadastro"),
     path('home', views.home, name="home"),
     path('adm', views.adm, name="adm"),
+    path('adm/painel', views.painel, name="adm/painel"),
     path('agenda', views.agenda, name="agenda"),
     path('consulta', views.consulta, name="consulta"),
+    path('consulta/adicionar', views.adicionar_consulta, name="adicionar_consulta"),
+    path('consulta/deletar', views.deletar_consulta, name="deletar_consulta"),
+    path('consulta/alterar', views.alterar_consulta, name="alterar_consulta"),
+
 ]
 
