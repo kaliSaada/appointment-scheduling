@@ -109,8 +109,10 @@ def home(request):
 @api_view(["GET"])
 @permission_classes((IsAuthenticated,))
 def agenda(request):
+    start = request.query_params['start']
+    end = request.query_params['end']
     eventos = []
-    consultas = Consulta.objects.all().values('codigo', 'user_codigo', 'date', 'hora')
+    consultas = Consulta.objects.all().filter(date__range=(start, end)).values('codigo', 'user_codigo', 'date', 'hora')
     for consulta in consultas:
         evento = [{
             "id": "%s" % (consulta['user_codigo']),
@@ -161,9 +163,12 @@ def alterar_consulta(request, codigo_consulta):
 
 
 @csrf_exempt
-def deletar_consulta(request, codigo_consulta):
+def deletar_consulta(request):
     if request.method == 'POST':
+        codigo_consulta = request.POST['codigo_consulta']
         Consulta.objects.filter(codigo=codigo_consulta).delete()
+        redirect_mensagem(1, 'home', request, 'Consulta deletada.')
+        return redirect(home)
     else:
         messages.error(request, 'Não foi possivel alterar a consulta.')
         return redirect(index)
