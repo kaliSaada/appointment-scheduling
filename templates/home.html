@@ -1,0 +1,128 @@
+{% load static %}
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <title>MED</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-adm.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/agenda.css' %}">
+    <link href="{% static 'css/fullcalendar.min.css' %}" rel='stylesheet' />
+    <link href="{% static 'css/bootstrap.min.css' %}" rel='stylesheet' />
+    <link href="{% static 'css/fullcalendar.print.min.css' %}" rel='stylesheet' media='print' />
+    <script src="{% static 'js/moment.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/fullcalendar.min.js' %}"></script>
+    <script src="{% static 'js/gcal.min.js' %}"></script>
+    <script src="{% static 'js/pt-br.js' %}"></script>
+    <script src="{% static 'js/calendario.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+
+<body>
+<nav class="nav">
+    <div class="login-box animated fadeInUp">
+        <div class="box-header">
+            <div class="center">
+            <span class="title-adm">Agenda</span>
+                <div class="menu">
+                <a href="{% url 'home' %}"><button type="button" class="btn btn-dark">Home</button></a>
+                <a href="{% url 'sair' %}"><button type="button" class="btn btn-dark">Sair</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container">
+  <div id='wrap'>
+    <div id='external-events'>
+      <form action="{% url 'adicionar_consulta' %}" method="post">
+        <h3>Marcar consulta</h3>
+        <label>Data&emsp;/&emsp; Hora</label>
+        <br/>
+        <input type="date" id="data" name="data" required>
+        <input type="time" id="time" name="time" min="4:00" max="23:00" required />
+        <br/>
+        <label>Comentario</label>
+        <br/>
+        <input type="text" class="form-control" id="inputAddress" name="comentario">
+        <br/>
+        <button class="btn btn-success" type="submit">Gravar</button>
+        {% if messages %}
+        <span class="messages">
+        {% for message in messages %}
+            <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+        {% endfor %}
+        <span/>
+        {% endif %}
+       </form>
+        <hr>
+        <h2>Consultas</h2>
+        <div class="col-xs-6">
+            <div class="well" style="max-height: 150px;overflow: auto;">
+            	<t-body>
+
+                </t-body>
+                <br>
+            </div>
+                <button type="button"  class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" >Deletar</button>
+                <button type="button"  class="btn btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg">Alterar</button>
+            <pre id="display-json"></pre>
+        </div>
+
+  </div>
+
+    <div id='calendar'></div>
+
+    <div style='clear:both'></div>
+
+</div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Deseja deletar a consulta selecionada?
+      </div>
+      <div class="modal-footer">
+        <button type="button" onClick="deletar_consulta()" class="btn btn-success" >SIM</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">NÂO</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form>
+        <label>Data&emsp;/&emsp; Hora</label>
+        <br/>
+        <input type="date" id="data" name="data" required>
+        <input type="time" id="time" name="time" min="4:00" max="23:00" required />
+        <br/>
+        <label>Comentario</label>
+        <br/>
+        <input type="text" class="form-control" id="inputAddress" name="comentario">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>
