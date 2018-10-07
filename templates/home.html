@@ -17,6 +17,7 @@
     <script src="{% static 'js/gcal.min.js' %}"></script>
     <script src="{% static 'js/pt-br.js' %}"></script>
     <script src="{% static 'js/calendario.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </head>
 
 <body>
@@ -47,7 +48,7 @@
         <br/>
         <input type="text" class="form-control" id="inputAddress" name="comentario">
         <br/>
-        <button class="btn btn-primary" type="submit">Gravar</button>
+        <button class="btn btn-success" type="submit">Gravar</button>
         {% if messages %}
         <span class="messages">
         {% for message in messages %}
@@ -60,12 +61,13 @@
         <h2>Consultas</h2>
         <div class="col-xs-6">
             <div class="well" style="max-height: 150px;overflow: auto;">
-            	<ul id="check-list-box" class="list-group checked-list-box">
-                  <li class="list-group-item" data-color="info">Dapibus ac facilisis in</li>
-                </ul>
+            	<t-body>
+
+                </t-body>
                 <br>
             </div>
-                <button class="btn btn-primary" id="get-checked-data">Salvar</button>
+                <button type="button"  class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" >Deletar</button>
+                <button type="button"  class="btn btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg">Alterar</button>
             <pre id="display-json"></pre>
         </div>
 
@@ -77,6 +79,50 @@
 
 </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Deseja deletar a consulta selecionada?
+      </div>
+      <div class="modal-footer">
+        <button type="button" onClick="deletar_consulta()" class="btn btn-success" >SIM</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">NÂO</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form>
+        <label>Data&emsp;/&emsp; Hora</label>
+        <br/>
+        <input type="date" id="data" name="data" required>
+        <input type="time" id="time" name="time" min="4:00" max="23:00" required />
+        <br/>
+        <label>Comentario</label>
+        <br/>
+        <input type="text" class="form-control" id="inputAddress" name="comentario">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 
 </html>
