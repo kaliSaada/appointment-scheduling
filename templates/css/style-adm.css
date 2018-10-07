@@ -70,7 +70,6 @@
 	font-size: 0.7em;
 	letter-spacing: 1px;
 	background-color: #665851;
-	cursor:pointer;
 	outline: none;
 }
 
@@ -110,6 +109,29 @@
     color:red;
 }
 
+.painel-user{
+    background: white;
+    top:50px;
+	width: 300px;
+	margin: 0 auto;
+	position: relative;
+	padding-bottom: 30px;
+	border-radius: 5px;
+	box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    float: left;
+}
+
+.state-icon {
+    left: -5px;
+}
+.list-group-item-primary {
+    color: rgb(255, 255, 255);
+    background-color: rgb(66, 139, 202);
+}
+
+.well .list-group {
+    margin-bottom: 0px;
+}
 
 
 

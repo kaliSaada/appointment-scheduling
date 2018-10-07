@@ -2,50 +2,41 @@
 <html lang="pt-br">
 
 <head>
+    <meta http-equiv="Content-Language" content="pt-br">
     <meta charset="utf-8">
     <title>MED</title>
-
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style-adm.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/agenda.css' %}">
-    <link href="{% static 'css/fullcalendar.min.css' %}" rel='stylesheet' />
-    <link href="{% static 'css/fullcalendar.print.min.css' %}" rel='stylesheet' media='print' />
-    <script src="{% static 'js/moment.min.js' %}"></script>
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/fullcalendar.min.js' %}"></script>
-    <script src="{% static 'js/gcal.min.js' %}"></script>
-    <script src="{% static 'js/pt-br.js' %}"></script>
-    <script src="{% static 'js/calendario_adm.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
 <div class="container">
-    <div class="login-box animated fadeInUp">
-        <div class="box-header">
-            <span class="title-adm">Agenda</span>
-            <a href="{% url 'sair' %}"><p class="small">Sair</p></a>
+    <div class="group">
+    <div class="login-box">
+        <div class="box-header" style="background: black;">
+            <h2>ADM</h2>
         </div>
+        <form action="{% url 'adm' %}" method="post">
+        <label for="username">Usuário</label>
+        <br/>
+        <input type="text" name="username" id="username" minlength="5" maxlength="100" required>
+        <br/>
+        <label for="password">Senha</label>
+        <br/>
+        <input type="password" name="password" id="password" minlength="8" maxlength="24" required>
+        <br/>
+        <button type="submit" style="background: black;" >Entrar</button>
+        <br/>
+        {% if messages %}
+        <span class="messages">
+        {% for message in messages %}
+            <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+        {% endfor %}
+        <span/>
+        {% endif %}
+        </form>
+        <a href="{% url 'index' %}"><p class="small">Voltar</p></a>
     </div>
-  <div id='wrap'>
-
-    <div id='external-events'>
-      <h4>Consulta</h4>
-      <div class='fc-event'></div>
-      <div class='fc-event'>My Event 2</div>
-      <div class='fc-event'>My Event 3</div>
-      <div class='fc-event'>My Event 4</div>
-      <div class='fc-event'>My Event 5</div>
-      <p>
-        <input type='checkbox' id='drop-remove' />
-        <label for='drop-remove'>remove after drop</label>
-      </p>
-    </div>
-
-    <div id='calendar'></div>
-
-    <div style='clear:both'></div>
-
-  </div>
 </div>
 </body>
 

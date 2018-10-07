@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8">
     <title>MED</title>
-
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
 <div class="container">
-    <div class="login-box animated fadeInUp">
+    <div class="group">
+    <div class="login-box">
         <div class="box-header">
             <h2>LOGIN</h2>
         </div>
@@ -35,6 +35,12 @@
         {% endif %}
         </form>
         <a href="{% url 'cadastro' %}"><p class="small">Cadastrar-se</p></a>
+    </div>
+    <div class="icons">
+        <div class="cam">
+        <a href="{% url 'adm' %}"><img src="img/face.png" height="50" width="50"></a></br>
+        </div>
+    </div>
     </div>
 </div>
 </body>

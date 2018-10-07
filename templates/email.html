@@ -9,14 +9,13 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style-adm.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/agenda.css' %}">
     <link href="{% static 'css/fullcalendar.min.css' %}" rel='stylesheet' />
-    <link href="{% static 'css/bootstrap.min.css' %}" rel='stylesheet' />
     <link href="{% static 'css/fullcalendar.print.min.css' %}" rel='stylesheet' media='print' />
     <script src="{% static 'js/moment.min.js' %}"></script>
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/fullcalendar.min.js' %}"></script>
     <script src="{% static 'js/gcal.min.js' %}"></script>
     <script src="{% static 'js/pt-br.js' %}"></script>
-    <script src="{% static 'js/calendario.js' %}"></script>
+    <script src="{% static 'js/calendario_adm.js' %}"></script>
 </head>
 
 <body>
@@ -26,8 +25,7 @@
             <div class="center">
             <span class="title-adm">Agenda</span>
                 <div class="menu">
-                <a href="{% url 'home' %}"><button type="button" class="btn btn-dark">Home</button></a>
-                <a href="{% url 'sair' %}"><button type="button" class="btn btn-dark">Sair</button></a>
+                <a href="{% url 'sair' %}"><p class="small">Sair</p></a>
                 </div>
             </div>
         </div>
@@ -45,9 +43,11 @@
         <br/>
         <label>Comentario</label>
         <br/>
-        <input type="text" class="form-control" id="inputAddress" name="comentario">
+        <input type="text" id="comentario" name="comentario">
         <br/>
-        <button class="btn btn-primary" type="submit">Gravar</button>
+        <br/>
+        <button type="submit">Gravar</button>
+        <br/>
         {% if messages %}
         <span class="messages">
         {% for message in messages %}
@@ -56,26 +56,15 @@
         <span/>
         {% endif %}
        </form>
-        <hr>
-        <h2>Consultas</h2>
-        <div class="col-xs-6">
-            <div class="well" style="max-height: 150px;overflow: auto;">
-            	<ul id="check-list-box" class="list-group checked-list-box">
-                  <li class="list-group-item" data-color="info">Dapibus ac facilisis in</li>
-                </ul>
-                <br>
-            </div>
-                <button class="btn btn-primary" id="get-checked-data">Salvar</button>
-            <pre id="display-json"></pre>
-        </div>
-
-  </div>
+    </div>
+    <div class="animated fadeInUp">
+    </div>
 
     <div id='calendar'></div>
 
     <div style='clear:both'></div>
 
-</div>
+  </div>
 </div>
 </body>
 
