@@ -107,17 +107,17 @@
         <form>
         <label>Data&emsp;/&emsp; Hora</label>
         <br/>
-        <input type="date" id="data" name="data" required>
-        <input type="time" id="time" name="time" min="4:00" max="23:00" required />
+        <input type="date" name="data_alterar" required>
+        <input type="time" name="time_alterar" min="4:00" max="23:00" required />
         <br/>
         <label>Comentario</label>
         <br/>
-        <input type="text" class="form-control" id="inputAddress" name="comentario">
+        <input type="text" class="form-control" name="comentario_alterar">
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" onclick="alterar_consulta()" class="btn btn-primary">Salvar</button>
       </div>
     </div>
   </div>

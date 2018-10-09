@@ -54,11 +54,10 @@ function deletar_consulta(){
                 var settings = {
                   "async": true,
                   "crossDomain": true,
-                  "url": "http://localhost:8000/consulta/deletar",
+                  "url": "/consulta/deletar",
                   "method": "POST",
                   "headers": {
                     "content-type": "application/x-www-form-urlencoded",
-                    "authorization": "Basic a2hhbGlsOmtoYWwxMjM0"
                   },
                   "data": {
                     "codigo_consulta": pacote[i].id,
@@ -72,8 +71,13 @@ function deletar_consulta(){
     }
 
 }
-function deletar_consulta(){
+
+function alterar_consulta(){
   var pacote = document.getElementsByName('consultas');
+  var data = document.getElementsByName('data_alterar');
+  var time = document.getElementsByName('time_alterar');
+  var comentario = document.getElementsByName('comentario_alterar');
+  console.log(data, time, comentario)
     for (var i = 0; i < pacote.length; i++){
         if ( pacote[i].checked ) {
             console.log(pacote[i])
@@ -81,14 +85,16 @@ function deletar_consulta(){
                 var settings = {
                   "async": true,
                   "crossDomain": true,
-                  "url": "http://localhost:8000/consulta/deletar",
+                  "url": "/consulta/alterar",
                   "method": "POST",
                   "headers": {
                     "content-type": "application/x-www-form-urlencoded",
-                    "authorization": "Basic a2hhbGlsOmtoYWwxMjM0"
                   },
                   "data": {
                     "codigo_consulta": pacote[i].id,
+                    "data": data[0].value,
+                    "time": time[0].value,
+                    "comentario": comentario[0].value,
                   }
                 }
                 $.ajax(settings).done(function (response) {
@@ -100,9 +106,3 @@ function deletar_consulta(){
 
 }
 
-function abrir_modal(){
-    $('#myModal').modal('show')
-}
-function fechar_modal(){
-    $('#myModal').modal('hide')
-}
