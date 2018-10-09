@@ -109,8 +109,12 @@ def home(request):
 @api_view(["GET"])
 @permission_classes((IsAuthenticated,))
 def agenda(request):
-    start = request.query_params['start']
-    end = request.query_params['end']
+    try:
+        start = request.query_params['start']
+        end = request.query_params['end']
+    except:
+        return HttpResponse(json.dumps({'Mensagem': 'Informe a data de inicio e a data final.'}),
+                            content_type="application/json")
     eventos = []
     consultas = Consulta.objects.all().filter(date__range=(start, end)).values('codigo', 'user_codigo', 'date', 'hora')
     for consulta in consultas:
@@ -148,11 +152,12 @@ def adicionar_consulta(request):
 
 
 @csrf_exempt
-def alterar_consulta(request, codigo_consulta):
+def alterar_consulta(request):
     if request.method == 'POST':
-        consulta = Consulta.objects.all().filter(codigo=codigo_consulta)
+        consulta = Consulta.objects.all().filter(codigo=request.POST['codigo_consulta']).\
+            values('codigo', 'user_codigo', 'date', 'hora')
         consulta.date = request.POST['data']
-        consulta.hora = request.POST['hora']
+        consulta.hora = request.POST['time']
         consulta.comentario = request.POST['comentario']
         consulta.save()
         messages.success(request, 'Consulta alterada.')
